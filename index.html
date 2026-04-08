@@ -15,7 +15,7 @@
     </nav>
 
     <div class="container mt-4">
-    <form>
+    <form onsubmit="mostrarDados(); return false">
      
     <div class="card mb-4">
     <div class="card-header bg-info text-white text-center">
@@ -26,18 +26,18 @@
     <div class="row">
     <div class="col-md-6 mb-3">
     <label class="form-label">Nome</label>
-    <input type="text" class="form-control" required>
+    <input type="text" id="nome" class="form-control" required>
     </div>
     <br></br>
 
     <div class="col-md-3 mb-3">
     <label class="form-label">idade</label>
-    <input type="text" class="form-control" required>
+    <input type="text" id="idade" class="form-control" required>
     </div>
     
     <div class="col-md-3 mb-3">
     <label class="form-label">Sexo</label>
-    <select class="form-control" required>
+    <select id="sexo" class="form-control" required>
     <option>Masculino</option>
     <option>Feminino</option>
     </select>
@@ -59,22 +59,22 @@
 
         <div class="col-md-3 mb-3">
         <label class="form-label">Pressão Arterial</label>
-        <input type="text" class="form-control" required placeholder="Ex 120/80">
+        <input type="text" id="pressão" class="form-control" required placeholder="Ex 120/80">
         </div>
 
         <div class="col-md-3 mb-3">
         <label class="form-label">temperatura</label>
-        <input type="text" class="form-control" required placeholder="Ex 36.5°">
+        <input type="text" id="temperatura" class="form-control" required placeholder="Ex 36.5°">
         </div>
 
          <div class="col-md-3 mb-3">
         <label class="form-label">Frequência Cardiaca</label>
-        <input type="text" class="form-control" required>
+        <input type="text" id="frequência" class="form-control" required>
         </div>
 
          <div class="col-md-3 mb-3">
         <label class="form-label">Saturação </label>
-        <input type="text" class="form-control" required>
+        <input type="text" id="saturacao" class="form-control" required>
         </div>
 
     </div>
@@ -89,7 +89,7 @@
  <div class="card-body">   
  <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label" required>Descreva a Evolução</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <textarea id="evolucao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>
 
     </div>
@@ -104,17 +104,17 @@
 
     <div class="col-md-6 mb-3">
      <label class="form-label">Medicamento</label>
-     <input type="text" class="form-control" required>
+     <input type="text" id="medicamento" class="form-control" required>
     </div>
 
     <div class="col-md-3 mb-3">
      <label class="form-label">Dosagem</label>
-     <input type="text" class="form-control" required>
+     <input type="text" id="dosagem" class="form-control" required>
     </div>
 
     <div class="col-md-3 mb-3">
      <label class="form-label">Horário</label>
-     <input type="time" class="form-control" required>
+     <input type="time" id="hórario" class="form-control" required>
     </div>
 
     </div>
@@ -126,6 +126,63 @@
     </div>
     
     </form>
+    </div>  
+    
+    <div id="resultado" class="alert alert-secondary d-none text-center"></div>
+    
+    <div class="toast position-fixed bottom-0 end-0 p-3" id="toastSucesso">
+    <div class="toast-header">
+    <strong class="me-auto">Sistema</strong>
+    <button type="button" class="btn-close" database-bs-dismiss="toast"></button>
     </div>
+    <div class="toast-body">
+        Prontuário salvo com sucesso!
+    </div>
+    </div>
+
+    <script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    
+        function mostrarDados(){
+
+        let nome = document.querySelectorAll("input")[0].value;   
+        let idade = document.querySelectorAll("input")[1].value; 
+        let sexo = document.querySelectorAll("select").value; 
+
+        let pressão = document.querySelectorAll("input")[2].value;
+        let temperatura = document.querySelectorAll("input")[3].value;
+        let frequência = document.querySelectorAll("input")[4].value;
+        let saturacao = document.querySelectorAll("input")[5].value;  
+
+        let evolucao = document.querySelectorAll("textarea")[5].value; 
+         
+        let medicamento = document.querySelectorAll("input")[6].value; 
+        let dosagem = document.querySelectorAll("input")[7].value;
+        let hórario = document.querySelectorAll("input")[8].value;  
+
+        let resultado = `
+        <h5>Prontuário do Paciênte</h5>
+        Nome: ${nome} <br>
+        Idade: ${idade} <br>
+        Sexo: ${sexo} <br>
+        Pressão Arterial: ${pressão} <br>
+        Temperatura: ${temperatura} <br>
+        Frequência Cádiaca: ${frequência} <br>
+        Saturação: ${saturacao} <br>
+        Evolução: ${evolucao} <br>
+        Medicamento: ${medicamento} <br>
+        Dosagem: ${dosagem} <br>
+        Hórario: ${hórario}
+        `;
+        
+        let caixa = document.getElementById("Resultado");
+        caixa.innerHTML = resultado;
+        caixa.classList.remove("d-none");
+
+        let toast = new bootstrap.Toast(document.getElementById('toastSucesso'));
+        toast.show();
+
+        }
+        </script>
 </body>
 </html>
